@@ -1,26 +1,33 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import useAuthStore from "../../store/authStore";
+
 import '../../Css/Header.scss'
 
 const Header: React.FC = () => {
+  const logout = useAuthStore((state) => state.logout);
   const navigate = useNavigate();
+
+
+  const handleLogout = () => {
+    logout();
+    navigate("/login");
+  };
 
   return (
     <header className="header">
-      {/* Logo */}
+    
       <button className="logo" onClick={() => navigate("/")}>
-        🌟 MyApp
+       MyApp
       </button>
 
-      {/* Navigation Buttons */}
+  
       <nav className="nav">
-        <button onClick={() => navigate("/")}>Home</button>
         <button onClick={() => navigate("/dashboard")}>Dashboard</button>
         <button onClick={() => navigate("/resources")}>Resources</button>
       </nav>
 
-      {/* Logout Button */}
-      <button className="logout" onClick={() => console.log("Logout")}>
+      <button className="logout" onClick={handleLogout}>
         Logout
       </button>
     </header>

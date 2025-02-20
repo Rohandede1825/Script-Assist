@@ -8,7 +8,7 @@ import Dashboard from "./pages/Dashboard";
 import ProtectedRoute from "./pages/components/ProtectedRoute";
 import ResourceListPage from "./pages/ResourceListPage";
 import  Header from "../src/pages/components/Header";
-import ResourceDetailPage from "./pages/ResourceDetailPage";
+import ResourceDetailPage  from "./pages/ResourceDetailPage";
 const ScrollToTop = () => {
   const { pathname } = useLocation();
 
