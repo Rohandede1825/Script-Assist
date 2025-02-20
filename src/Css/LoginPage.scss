@@ -1,0 +1,69 @@
+.flex {
+    display: flex;
+  }
+  
+  .flex-col {
+    flex-direction: column;
+  }
+  
+  .items-center {
+    align-items: center;
+  }
+  
+  .justify-center {
+    justify-content: center;
+  }
+  
+  .h-screen {
+    height: 100vh;
+  }
+  
+  .text-2xl {
+    font-size: 1.5rem;
+  }
+  
+  .font-bold {
+    font-weight: bold;
+  }
+  
+  .mb-4 {
+    margin-bottom: 1rem;
+  }
+  
+  .space-y-3 > * + * {
+    margin-top: 0.75rem;
+  }
+  
+  .border {
+    border: 1px solid #ccc;
+  }
+  
+  .p-2 {
+    padding: 0.5rem;
+  }
+  
+  .bg-blue-500 {
+    background-color: #007bff;
+  }
+  
+  .text-white {
+    color: white;
+  }
+  
+  .rounded {
+    border-radius: 4px;
+  }
+  
+  button {
+    transition: background 0.3s;
+  
+    &:hover {
+      background-color: #0056b3;
+    }
+  }
+
+
+
+  .login-container{
+    border: #0056b3;
+  }

@@ -1,0 +1,26 @@
+.resource-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f4f4f4;
+  }
+  
+  .resource-card {
+    max-width: 400px;
+    text-align: center;
+    background-color: white;
+  }
+  
+  .loader {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+  }
+  
+  .error {
+    color: red;
+    text-align: center;
+    margin-top: 20px;
+  }
+  
