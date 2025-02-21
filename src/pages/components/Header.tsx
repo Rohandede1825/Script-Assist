@@ -17,11 +17,9 @@ const Header: React.FC = () => {
   return (
     <header className="header">
     
-      <button className="logo" onClick={() => navigate("/")}>
+      <button className="logo" onClick={() => navigate("/dashboard")}>
        MyApp
       </button>
-
-  
       <nav className="nav">
         <button onClick={() => navigate("/dashboard")}>Dashboard</button>
         <button onClick={() => navigate("/resources")}>Resources</button>

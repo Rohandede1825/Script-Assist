@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Table, TextInput, Select, Button, Loader, Container, ScrollArea, Group, Stack, Title } from "@mantine/core";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 interface Resource {
   name: string;
@@ -12,6 +13,7 @@ interface Resource {
   eye_color: string;
   birth_year: string;
   gender: string;
+  homeworld: string;
 }
 
 const fetchResources = async (): Promise<Resource[]> => {
@@ -27,6 +29,7 @@ const ResourceListPage: React.FC = () => {
   const [search, setSearch] = useState<string>("");
   const [filter, setFilter] = useState<string | null>(null);
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
+  const navigate = useNavigate();
 
   const { data, isLoading, error } = useQuery<Resource[]>({
     queryKey: ["resources"],
@@ -44,6 +47,15 @@ const ResourceListPage: React.FC = () => {
         ? a.name.localeCompare(b.name)
         : b.name.localeCompare(a.name)
     );
+
+  const ShowDetail = async (url: string) => {
+    try {
+      const { data } = await axios.get(url);
+      navigate("/homeworld-detail", { state: { homeworld: data } });
+    } catch (error) {
+      throw new Error("Failed to fetch data");
+    }
+  };
 
   return (
     <Container size="lg">
@@ -82,6 +94,7 @@ const ResourceListPage: React.FC = () => {
               <th>Eye Color</th>
               <th>Birth Year</th>
               <th>Gender</th>
+              <th>Homeworld</th>
             </tr>
           </thead>
           <tbody>
@@ -95,6 +108,9 @@ const ResourceListPage: React.FC = () => {
                 <td>{item.eye_color}</td>
                 <td>{item.birth_year}</td>
                 <td>{item.gender}</td>
+                <td onClick={() => ShowDetail(item.homeworld)} style={{ cursor: "pointer", color: "blue" }}>
+                  Show..
+                </td>
               </tr>
             ))}
           </tbody>

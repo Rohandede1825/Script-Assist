@@ -2,9 +2,13 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useAuthStore from "../store/authStore";
 import '../Css/LoginPage.scss'
+import axios from "axios";
+import { em } from "@mantine/core";
 
 
 const LoginPage = () => {
+  // const [username, setUsername] = useState<string>("");
+
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const login = useAuthStore((state) => state.login);
@@ -12,7 +16,24 @@ const LoginPage = () => {
 
   const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (email === "user@example.com" && password === "password123") {
+
+    // const res = axios('http://localhost:3000/signup', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   },
+    //   data: {
+    //     username: username,
+    //     password: password
+    //   }
+    // })
+    // res.then((response) => {
+    //   console.log(response)
+    // }).catch((error) => {
+    //   console.log(error)
+    // })
+
+    if (email === "user@gmail.com" && password === "123") {
       login({ email });
       navigate("/dashboard");
     } else {
@@ -26,7 +47,7 @@ const LoginPage = () => {
       <form onSubmit={handleLogin} className="flex flex-col space-y-3">
         <input
           type="email"
-          placeholder="Email"
+          placeholder="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           className="border p-2"

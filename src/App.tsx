@@ -9,8 +9,10 @@ import ProtectedRoute from "./pages/components/ProtectedRoute";
 import ResourceListPage from "./pages/ResourceListPage";
 import  Header from "../src/pages/components/Header";
 import ResourceDetailPage  from "./pages/ResourceDetailPage";
+import HomeworldDetailPage from "./pages/HomeworldDetailPage";
 const ScrollToTop = () => {
   const { pathname } = useLocation();
+
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -35,8 +37,20 @@ const App = () => {
               <Dashboard />
             </ProtectedRoute>
           }
+
+        
         />
-        <Route path="/resources" element={<ResourceListPage />} /> 
+        <Route
+          path="/resources"
+          element={
+            <ProtectedRoute>
+              <ResourceListPage />
+            </ProtectedRoute>
+          }
+        />
+        
+          <Route path="/resources" element={<ResourceListPage />} /> 
+        <Route path="/homeworld-detail" element={<HomeworldDetailPage />} />
         <Route path="/resource/:id" element={<ResourceDetailPage />} />
 
         <Route path="*" element={<LoginPage />} />
