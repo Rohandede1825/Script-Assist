@@ -5,7 +5,7 @@ interface User {
 }
 
 interface AuthState {
-  user: User | null;
+  user: User ;
   login: (userData: User) => void;
   logout: () => void;
 }
