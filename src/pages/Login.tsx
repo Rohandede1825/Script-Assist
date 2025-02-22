@@ -14,6 +14,7 @@ interface ApiResponse {
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
+  const setUser = useAuthStore((state) => state.setUser);
   const [formData, setFormData] = useState<FormData>({ email: "", password: "" });
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
@@ -36,7 +37,7 @@ const Login: React.FC = () => {
 
       if (response.data.token) {
         localStorage.setItem("authToken", response.data.token);
-        useAuthStore.getState().setUser(response.data.token);
+        setUser(response.data.token);
 
         navigate("/dashboard"); // Redirect after successful login
       } else {
