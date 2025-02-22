@@ -3,14 +3,13 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: #f8f9fa; // Soft Gray background
+  background: #f0f2f5; 
 }
 
 .login-card {
-  background: #ffffff; // Pure White card
-  padding: 30px;
+  background: #ffffff; 
   border-radius: 12px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); // Elegant bottom shadow
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   text-align: center;
   width: 100%;
   max-width: 400px;
@@ -19,7 +18,7 @@
 h2 {
   font-size: 24px;
   font-weight: bold;
-  color: #333333; // Dark Gray text
+  color: #333;
   margin-bottom: 20px;
 }
 
@@ -33,18 +32,18 @@ h2 {
   transition: border-color 0.3s;
 
   &:focus {
-    border-color: #6c8ae5; // Pastel Blue highlight
+    border-color: #5a67d8; 
     outline: none;
-    box-shadow: 0 0 8px rgba(108, 138, 229, 0.3);
+    box-shadow: 0 0 8px rgba(90, 103, 216, 0.3);
   }
 }
 
 .login-button {
   width: 100%;
-  padding: 12px;
+  padding: 10px;
   font-size: 16px;
   font-weight: bold;
-  background: linear-gradient(45deg, #6c8ae5, #4a72c3); // Gradient Button
+  background: #0c1456; 
   color: white;
   border: none;
   border-radius: 8px;
@@ -52,14 +51,28 @@ h2 {
   transition: all 0.3s ease-in-out;
 
   &:hover {
-    background: linear-gradient(45deg, #4a72c3, #6c8ae5);
+    background: #434190;
     transform: scale(1.05);
-    box-shadow: 0 6px 12px rgba(108, 138, 229, 0.4);
+    box-shadow: 0 4px 10px rgba(90, 103, 216, 0.4);
   }
 }
 
 .error-message {
-  color: #e63946; // Rich Red for errors
+  color: #e63946; 
   font-size: 14px;
   margin-bottom: 10px;
+}
+
+.text-button {
+  background: none;
+  border: none;
+  color: #172070;
+  font-size: 14px;
+  cursor: pointer;
+  transition: color 0.3s;
+
+  &:hover {
+    color: #434190;
+    text-decoration: underline;
+  }
 }

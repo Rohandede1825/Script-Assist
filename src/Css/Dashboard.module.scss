@@ -1,60 +1,84 @@
 .dashboard-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  height: 100vh;
+  color: #000;
   text-align: center;
-  min-height: 100vh;
-  padding: 2rem;
-  background: linear-gradient(to right, #f8f9fa, #e9ecef);
-  color: #333;
-  transition: all 0.3s ease-in-out;
+  padding: 20px;
+  animation: fadeIn 1s ease-in-out;
 }
 
 .dashboard-title {
-  font-size: 3rem;
+  font-size: 2.5rem;
   font-weight: bold;
-  margin-bottom: 1rem;
-  color: #0d6efd;
-  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
 }
 
 .dashboard-text {
-  font-size: 1.4rem;
-  max-width: 700px;
-  margin-bottom: 2rem;
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  max-width: 600px;
   line-height: 1.6;
-  color: #555;
+  text-align: center;
 }
 
-.get-started-button {
-  font-size: 1.2rem;
-  // padding: 1rem 2rem;
-  background-color: #0d6efd;
-  color: white;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: background 0.3s ease, transform 0.2s ease;
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
 
-  &:hover {
-    background-color: #0a58ca;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+button {
+  background: #ffcc00;
+  color: #000;
+  border: none;
+  padding: 12px 20px;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background: #ffd633;
+  transform: scale(1.05);
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
 @media (max-width: 768px) {
   .dashboard-title {
-    font-size: 2.5rem;
+    font-size: 2rem;
   }
 
   .dashboard-text {
-    font-size: 1.2rem;
-    max-width: 90%;
+    font-size: 1rem;
   }
 
-  .get-started-button {
-    font-size: 1rem;
-    padding: 0.8rem 1.5rem;
+  .button-group {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  button {
+    font-size: 0.9rem;
+    padding: 10px 16px;
   }
 }

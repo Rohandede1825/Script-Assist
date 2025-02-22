@@ -1,62 +1,65 @@
+$primary-color: #0f172a; 
+$secondary-color: #ffffff;
+$hover-color: #3b82f6; 
+$accent-color: #4f46e5;
+
 .header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  background: #fdfdfd; // Soft White
-  padding: 15px 25px;
-  color: #333333; // Deep Charcoal for text
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  justify-content: space-between;
+  background: $primary-color;
+  padding: 15px 30px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  border-bottom: 3px solid $accent-color;
+}
 
-  .logo {
-    font-size: 24px;
-    font-weight: bold;
-    color: #d4a373; // Rich Gold
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
+.logo {
+  font-size: 26px;
+  font-weight: bold;
+  color: $secondary-color;
+  cursor: pointer;
+  transition: color 0.3s ease-in-out;
 
-    &:hover {
-      color: #b57b50;
-      text-shadow: 0px 0px 8px rgba(212, 163, 115, 0.5);
-    }
+  &:hover {
+    color: $hover-color;
   }
+}
 
-  .nav {
-    display: flex;
-    gap: 20px;
+.nav {
+  display: flex;
+  gap: 25px;
 
-    button {
-      background: none;
-      border: 2px solid transparent;
-      color: #333333;
-      font-size: 16px;
-      cursor: pointer;
-      padding: 8px 15px;
-      border-radius: 8px;
-      transition: all 0.3s ease-in-out;
-
-      &:hover {
-        color: #d4a373;
-        border-color: #d4a373;
-        background: rgba(212, 163, 115, 0.1);
-        box-shadow: 0 0 8px rgba(212, 163, 115, 0.3);
-      }
-    }
-  }
-
-  .logout {
-    background: #e63946; // Elegant Red
+  button {
+    background: none;
     border: none;
-    color: white;
-    padding: 10px 18px;
-    font-size: 16px;
-    font-weight: 600;
-    border-radius: 8px;
+    color: $secondary-color;
+    font-size: 18px;
+    font-weight: 500;
     cursor: pointer;
-    transition: all 0.3s ease-in-out;
+    transition: color 0.3s ease-in-out;
+    padding: 6px 12px;
+    border-radius: 5px;
 
     &:hover {
-      background: #c22e3a;
-      box-shadow: 0px 0px 10px rgba(230, 57, 70, 0.5);
+      color: $hover-color;
+      background: rgba(255, 255, 255, 0.1);
     }
+  }
+}
+
+.logout {
+  background: $hover-color;
+  border: none;
+  color: $secondary-color;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out, transform 0.2s;
+
+  &:hover {
+    background: darken($hover-color, 10%);
+    transform: scale(1.07);
   }
 }

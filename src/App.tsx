@@ -5,12 +5,13 @@ import { theme } from "./theme";
 import "./Css/App.scss";
 import Login from "./pages/LoginPage";
 import Signup from "./pages/Signup";
-import Dashboard from "./pages/Dashboard";
+import Dashboard from "./pages/landing/Dashboard";
 import ResourceListPage from "./pages/ResourceListPage";
 import ResourceDetailPage from "./pages/ResourceDetailPage";
 import HomeworldDetailPage from "./pages/HomeworldDetailPage";
 import Header from "./pages/components/Header";
 import ProtectedRoute from "./pages/components/ProtectedRoute";
+import Landing from "./pages/landing/Landing";
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -31,11 +32,12 @@ const App = () => {
         <Routes>
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
+
           <Route
-            path="/dashboard"
+            path="/landing"
             element={
               <ProtectedRoute>
-                <Dashboard />
+                <Landing />
               </ProtectedRoute>
             }
           />
@@ -44,6 +46,14 @@ const App = () => {
             element={
               <ProtectedRoute>
                 <ResourceListPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <Dashboard />
               </ProtectedRoute>
             }
           />

@@ -21,37 +21,29 @@ const SignupPage = () => {
   };
 
   return (
-    <div className="login-container flex flex-col items-center justify-center h-screen">
+    <div className="login-container">
       <div className="login-card">
-        <h2 className="text-2xl font-bold mb-4">Signup</h2>
+        <h2>Signup</h2>
         {error && <p className="error-message">{error}</p>}
-        <form onSubmit={handleSignup} className="flex flex-col space-y-3">
+        <form onSubmit={handleSignup}>
           <input
             type="email"
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="border p-2 input-field"
+            className="input-field"
           />
           <input
             type="password"
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="border p-2 input-field"
+            className="input-field"
           />
-          <button type="submit" className="bg-green-500 text-white p-2 rounded login-button">
-            Signup
-          </button>
+          <button type="submit" className="login-button">Signup</button>
         </form>
-        <p className="mt-3 text-sm">
-          Already have an account?{" "}
-          <button
-            className="text-blue-500 underline"
-            onClick={() => navigate("/login")}
-          >
-            Login here
-          </button>
+        <p className="text-button" onClick={() => navigate("/login")}>
+          Already have an account? Login here
         </p>
       </div>
     </div>
