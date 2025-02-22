@@ -4,6 +4,7 @@ import { MantineProvider } from "@mantine/core";
 import { theme } from "./theme";
 import "./Css/App.scss";
 import Login from "./pages/LoginPage";
+import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
 import ResourceListPage from "./pages/ResourceListPage";
 import ResourceDetailPage from "./pages/ResourceDetailPage";
@@ -28,6 +29,7 @@ const App = () => {
       <MantineProvider theme={theme} withGlobalStyles withNormalizeCSS>
         <ScrollToTop />
         <Routes>
+          <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
           <Route
             path="/dashboard"
@@ -61,9 +63,7 @@ const App = () => {
               </ProtectedRoute>
             }
           />
-
-          {/* Default route */}
-          <Route path="*" element={<Login />} />
+          <Route path="*" element={<Signup />} />
         </Routes>
       </MantineProvider>
     </>
