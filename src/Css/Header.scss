@@ -1,56 +1,62 @@
 .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fdfdfd; // Soft White
+  padding: 15px 25px;
+  color: #333333; // Deep Charcoal for text
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
+  .logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #d4a373; // Rich Gold
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+      color: #b57b50;
+      text-shadow: 0px 0px 8px rgba(212, 163, 115, 0.5);
+    }
+  }
+
+  .nav {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #1a1a2e;
-    padding: 15px 20px;
-    color: white;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-  
-    .logo {
-      font-size: 20px;
-      font-weight: bold;
+    gap: 20px;
+
+    button {
       background: none;
-      border: none;
-      color: #00adb5;
+      border: 2px solid transparent;
+      color: #333333;
+      font-size: 16px;
       cursor: pointer;
-      transition: color 0.3s;
-  
-      &:hover {
-        color: #00fff5;
-      }
-    }
-  
-    .nav {
-      display: flex;
-      gap: 15px;
-  
-      button {
-        background: none;
-        border: none;
-        color: white;
-        font-size: 16px;
-        cursor: pointer;
-        transition: color 0.3s;
-  
-        &:hover {
-          color: #00adb5;
-        }
-      }
-    }
-  
-    .logout {
-      background: #ff4b5c;
-      border: none;
-      color: white;
       padding: 8px 15px;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background 0.3s;
-  
+      border-radius: 8px;
+      transition: all 0.3s ease-in-out;
+
       &:hover {
-        background: #ff1e2d;
+        color: #d4a373;
+        border-color: #d4a373;
+        background: rgba(212, 163, 115, 0.1);
+        box-shadow: 0 0 8px rgba(212, 163, 115, 0.3);
       }
     }
   }
-  
+
+  .logout {
+    background: #e63946; // Elegant Red
+    border: none;
+    color: white;
+    padding: 10px 18px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+      background: #c22e3a;
+      box-shadow: 0px 0px 10px rgba(230, 57, 70, 0.5);
+    }
+  }
+}
