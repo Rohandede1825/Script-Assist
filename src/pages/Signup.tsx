@@ -1,8 +1,9 @@
 import React, { useState, ChangeEvent, FormEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
+import axios from "axios";
+import "react-toastify/dist/ReactToastify.css";
 
-// Define interface for form data
 interface FormData {
   name: string;
   email: string;
@@ -19,12 +20,10 @@ const Signup: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
-  // Handle input changes
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // Handle form submission
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
@@ -33,55 +32,26 @@ const Signup: React.FC = () => {
     try {
       const backendUrl = "https://temp-app-backend.onrender.com/api/user/signup";
 
-      const response = await fetch(backendUrl, {
-        method: "POST",
+      const response = await axios.post(backendUrl, formData, {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
       });
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || "Signup failed due to server issue");
-      }
-
-      alert("Signup successful! Redirecting to login...");
-      notifySuccess();
+      toast.success("Account Created Successfully!", {
+        position: "top-center",
+        autoClose: 5000,
+      });
       navigate("/login");
     } catch (error: any) {
-      notifyError();
-      setError(error.message);
-      console.error("Signup Error:", error.message);
+      setError(error.response?.data?.message || "Signup failed");
+      toast.error(error.response?.data?.message || "Signup failed", {
+        position: "top-center",
+        autoClose: 5000,
+      });
     } finally {
       setLoading(false);
     }
-  };
-
-  const notifySuccess = () => {
-    toast.success("Account Created Successfully!", {
-      position: "top-center",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-    });
-  };
-
-  const notifyError = () => {
-    toast.error("Signup failed", {
-      position: "top-center",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-    });
   };
 
   return (
@@ -144,7 +114,6 @@ const Signup: React.FC = () => {
           </Link>
         </p>
       </div>
-
       <ToastContainer />
     </div>
   );

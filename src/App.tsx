@@ -3,7 +3,6 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import { MantineProvider, Navbar } from "@mantine/core";
 import { theme } from "./theme";
 import "./Css/App.scss";
-import LoginPage from "./pages/LoginPage";
 import Dashboard from "./pages/Dashboard";
 import ProtectedRoute from "./pages/components/ProtectedRoute";
 import ResourceListPage from "./pages/ResourceListPage";
@@ -54,7 +53,7 @@ const App = () => {
         <Route path="/homeworld-detail" element={<HomeworldDetailPage />} />
         <Route path="/resource/:id" element={<ResourceDetailPage />} />
 
-        <Route path="*" element={<LoginPage />} />
+        <Route path="*" element={<Signup />} />
       </Routes>
     </MantineProvider>
     </>
