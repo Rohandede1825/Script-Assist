@@ -2,7 +2,7 @@ import React, { useState, ChangeEvent, FormEvent } from "react";
 import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
-import { Navigate } from "react-router-dom";
+import { Navigate , useNavigate} from "react-router-dom";
 
 interface FormData {
   email: string;
