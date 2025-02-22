@@ -23,6 +23,7 @@ const LoginPage = () => {
       });
       const token = response.data.token;
       login(token);
+      console.log(token);
       navigate("/dashboard");
     } catch (err) {
       setError("An error occurred. Please try again.");
