@@ -14,19 +14,25 @@ const LoginPage = () => {
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError(null);
-    const res = axios.get('')
+    // const res = axios.get('')
 
-    try {
-      const response = await axios.post("https://rentnow-backend.onrender.com/api/auth/login", {
-        email,
-        password,
-      });
-      const token = response.data.token;
-      login(token);
-      console.log(token);
+    // try {
+    //   const response = await axios.post("https://rentnow-backend.onrender.com/api/auth/login", {
+    //     email,
+    //     password,
+    //   });
+    //   const token = response.data.token;
+    //   login(token);
+    //   console.log(token);
+    //   navigate("/dashboard");
+    // } catch (err) {
+    //   setError("An error occurred. Please try again.");
+    // }
+
+    if(email === "user@gmail.com" && password === "123") {
+      //@ts-ignore
+      login("token");
       navigate("/dashboard");
-    } catch (err) {
-      setError("An error occurred. Please try again.");
     }
   };
 
