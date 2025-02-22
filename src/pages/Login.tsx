@@ -1,6 +1,5 @@
 import React, { useState, ChangeEvent, FormEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
 import useAuthStore from "../store/authStore";
 
@@ -29,24 +28,22 @@ const Login: React.FC = () => {
     setError(null);
 
     try {
-      const { data }: { data: ApiResponse } = await axios.post(
+      const response = await axios.post<ApiResponse>(
         "https://temp-app-backend.onrender.com/api/user/login",
         formData,
         { headers: { "Content-Type": "application/json" } }
       );
 
-      if (data.token) {
-        localStorage.setItem("authToken", data.token);
-        useAuthStore.getState().setUser(data.token); // Update Zustand state
+      if (response.data.token) {
+        localStorage.setItem("authToken", response.data.token);
+        useAuthStore.getState().setUser(response.data.token);
 
-        toast.success("Login Successful! Redirecting...");
-        setTimeout(() => navigate("/dashboard"), 1000);
+        navigate("/dashboard"); // Redirect after successful login
       } else {
-        throw new Error("Token not received");
+        setError("Token not received. Please try again.");
       }
     } catch (error: any) {
-      setError(error.response?.data?.message || "Login failed");
-      toast.error("Login failed. Please check your credentials.");
+      setError(error.response?.data?.message || "Login failed. Check credentials.");
     } finally {
       setLoading(false);
     }
@@ -100,8 +97,6 @@ const Login: React.FC = () => {
           </Link>
         </p>
       </div>
-
-      <ToastContainer />
     </div>
   );
 };
