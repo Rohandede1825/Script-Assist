@@ -17,12 +17,13 @@ const LoginPage = () => {
     const res = axios.get('')
 
     try {
-      if (email === "user@gmail.com" && password === "123") {
-        login({ email });
-        navigate("/dashboard");
-      } else {
-        setError("Invalid email or password.");
-      }
+      const response = await axios.post("https://rentnow-backend.onrender.com/api/auth/login", {
+        email,
+        password,
+      });
+      const token = response.data.token;
+      login(token);
+      navigate("/dashboard");
     } catch (err) {
       setError("An error occurred. Please try again.");
     }
