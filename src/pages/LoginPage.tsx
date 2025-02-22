@@ -21,7 +21,7 @@ const LoginPage = () => {
     
 
     try {
-      const response = await axios.post("https://temp-app-backend.onrender.com/api/user/login", {
+      const response = await axios.post("", {
         email,
         password,
       });
