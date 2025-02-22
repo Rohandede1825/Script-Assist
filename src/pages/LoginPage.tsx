@@ -14,10 +14,10 @@ const LoginPage = () => {
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError(null);
-    const res = axios.get('')
+    
 
     try {
-      const response = await axios.post("https://rentnow-backend.onrender.com/api/auth/login", {
+      const response = await axios.post("https://temp-app-backend.onrender.com/api/user/login", {
         email,
         password,
       });
