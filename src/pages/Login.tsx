@@ -3,13 +3,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
 
-// Define interface for form data
 interface FormData {
   email: string;
   password: string;
 }
 
-// Define interface for API response
 interface ApiResponse {
   message: string;
   token?: string;
