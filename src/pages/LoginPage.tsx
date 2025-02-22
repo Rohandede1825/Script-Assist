@@ -12,16 +12,7 @@ const LoginPage = () => {
   const navigate = useNavigate();
 
 
-  const backendUrl = "https://rentnow-backend.onrender.com/api/auth/login"; // Correct URL?
-
-fetch(backendUrl, {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({ email, password }),
-})
-  .then(response => response.json()) // Ensure the backend returns valid JSON
-  .then(data => console.log("Login Success:", data))
-  .catch(error => console.error("Fetch Error:", error));
+  
 
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
