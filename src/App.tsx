@@ -3,7 +3,7 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import { MantineProvider } from "@mantine/core";
 import { theme } from "./theme";
 import "./Css/App.scss";
-import Login from "./pages/Login";
+import Login from "./pages/LoginPage";
 import Dashboard from "./pages/Dashboard";
 import ResourceListPage from "./pages/ResourceListPage";
 import ResourceDetailPage from "./pages/ResourceDetailPage";
