@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useAuthStore from "../store/authStore";
 import "../Css/LoginPage.scss";
-import axios from "axios";
 
 const LoginPage = () => {
   const [email, setEmail] = useState<string>("");
@@ -11,26 +10,19 @@ const LoginPage = () => {
   const login = useAuthStore((state) => state.login);
   const navigate = useNavigate();
 
-
-  
-
-
-  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError(null);
-    
 
-    try {
-      const response = await axios.post("", {
-        email,
-        password,
-      });
-      const token = response.data.token;
-      login(token);
-      console.log(token);
+    // ✅ Mock Authentication (Remove Backend)
+    if (email === "test@example.com" && password === "password123") {
+      const fakeToken = "mocked-jwt-token";
+      //@ts-ignore
+      login(fakeToken);
+      console.log("Mock Token:", fakeToken);
       navigate("/dashboard");
-    } catch (err) {
-      setError("An error occurred. Please try again.");
+    } else {
+      setError("Invalid email or password.");
     }
   };
 
