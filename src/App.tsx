@@ -10,6 +10,7 @@ import ResourceListPage from "./pages/ResourceListPage";
 import  Header from "../src/pages/components/Header";
 import ResourceDetailPage  from "./pages/ResourceDetailPage";
 import HomeworldDetailPage from "./pages/HomeworldDetailPage";
+import Signup from "./pages/Signup";
 const ScrollToTop = () => {
   const { pathname } = useLocation();
 
@@ -29,6 +30,9 @@ const App = () => {
     <MantineProvider theme={theme} withGlobalStyles withNormalizeCSS>
       <ScrollToTop />
       <Routes>
+        
+
+        <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<LoginPage />} />
         <Route
           path="/dashboard"
