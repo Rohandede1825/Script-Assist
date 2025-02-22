@@ -6,8 +6,9 @@ interface ProtectedRouteProps {
 }
 
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
-  const user = useAuthStore((state) => state.user);
+  const user = useAuthStore((state) => state.user) || localStorage.getItem("authToken");
   return user ? children : <Navigate to="/login" />;
 };
+
 
 export default ProtectedRoute;

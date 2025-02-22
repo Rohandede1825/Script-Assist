@@ -1,23 +1,19 @@
 import { create } from "zustand";
 
-interface User {
-  email: string;
-}
-
 interface AuthState {
-  user: User | null;
-  login: (userData: User) => void;
+  user: string | null;
+  setUser: (token: string) => void;
   logout: () => void;
 }
 
 const useAuthStore = create<AuthState>((set) => ({
-  user: JSON.parse(localStorage.getItem("user") || "null"),
-  login: (userData) => {
-    localStorage.setItem("user", JSON.stringify(userData));
-    set({ user: userData });
+  user: localStorage.getItem("authToken") || null,
+  setUser: (token: string) => {
+    localStorage.setItem("authToken", token);
+    set({ user: token });
   },
   logout: () => {
-    localStorage.removeItem("user");
+    localStorage.removeItem("authToken");
     set({ user: null });
   },
 }));

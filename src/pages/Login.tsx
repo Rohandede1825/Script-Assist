@@ -1,18 +1,23 @@
 import React, { useState, ChangeEvent, FormEvent } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
-import { Navigate , useNavigate} from "react-router-dom";
+import useAuthStore from "../store/authStore";
 
 interface FormData {
   email: string;
   password: string;
 }
 
+interface ApiResponse {
+  token: string;
+}
+
 const Login: React.FC = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState<FormData>({ email: "", password: "" });
   const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -21,18 +26,27 @@ const Login: React.FC = () => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
-    
+    setError(null);
+
     try {
-      const response = await axios.post(
+      const { data }: { data: ApiResponse } = await axios.post(
         "https://temp-app-backend.onrender.com/api/user/login",
         formData,
         { headers: { "Content-Type": "application/json" } }
       );
-      
-      toast.success(response.data.message || "Login successful!");
-      navigate("/dashboard");
+
+      if (data.token) {
+        localStorage.setItem("authToken", data.token);
+        useAuthStore.getState().setUser(data.token); // Update Zustand state
+
+        toast.success("Login Successful! Redirecting...");
+        setTimeout(() => navigate("/dashboard"), 1000);
+      } else {
+        throw new Error("Token not received");
+      }
     } catch (error: any) {
-      toast.error(error.response?.data?.message || "Login failed. Try again.");
+      setError(error.response?.data?.message || "Login failed");
+      toast.error("Login failed. Please check your credentials.");
     } finally {
       setLoading(false);
     }
@@ -42,7 +56,7 @@ const Login: React.FC = () => {
     <div className="min-h-screen flex items-center justify-center bg-white">
       <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-md border border-gray-300">
         <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">Login</h2>
-        
+
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label className="block text-sm font-medium text-gray-700">Email</label>
@@ -77,10 +91,16 @@ const Login: React.FC = () => {
           </button>
         </form>
 
+        {error && <p className="text-red-500 text-sm mt-2 text-center">{error}</p>}
+
         <p className="mt-4 text-center text-sm text-gray-600">
-          Don't have an account? <Link to="/signup" className="text-gray-700 font-bold">Sign up</Link>
+          Don't have an account?{" "}
+          <Link to="/signup" className="text-gray-700 font-bold">
+            Sign up
+          </Link>
         </p>
       </div>
+
       <ToastContainer />
     </div>
   );
