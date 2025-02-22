@@ -14,6 +14,7 @@ const LoginPage = () => {
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError(null);
+    const res = axios.get('')
 
     try {
       if (email === "user@gmail.com" && password === "123") {

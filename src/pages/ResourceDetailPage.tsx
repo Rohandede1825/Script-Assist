@@ -60,7 +60,7 @@ const ResourceDetailPage: React.FC = () => {
 
   return (
     <Container className="resource-container">
-      <Card shadow="sm" padding="lg" radius="md" className="search-card">
+      <Card shadow="xl" padding="xl" radius="lg" className="search-card">
         <Title order={2} className="title">Search Star Wars Character</Title>
         <TextInput
           placeholder="Enter ID (1-80)..."
@@ -71,10 +71,10 @@ const ResourceDetailPage: React.FC = () => {
         />
         <Group mt="md" position="center">
           <Button onClick={handleSearch} className="search-button">
-            Search Resource
+            Search
           </Button>
           <Button onClick={handleViewAll} className="view-all-button">
-            View All Resources
+            View All
           </Button>
         </Group>
       </Card>
@@ -84,7 +84,7 @@ const ResourceDetailPage: React.FC = () => {
       ) : error ? (
         <Text className="error">Error fetching resource</Text>
       ) : (
-        <Card shadow="sm" padding="lg" radius="md" className="resource-card">
+        <Card shadow="lg" padding="xl" radius="lg" className="resource-card">
           <Title order={2} className="character-name">{data?.name}</Title>
           <Group mt="md" className="badges-group">
             <Badge color="blue">Height: {data?.height} cm</Badge>
@@ -95,7 +95,7 @@ const ResourceDetailPage: React.FC = () => {
           <Text>Eye Color: {data?.eye_color}</Text>
           <Text>Birth Year: {data?.birth_year}</Text>
           <Badge color="yellow" mt="md">Gender: {data?.gender}</Badge>
-          <Button mt="lg" variant="light" onClick={() => navigate(-1)} className="back-button">
+          <Button mt="lg" variant="outline" onClick={() => navigate(-1)} className="back-button">
             Go Back
           </Button>
         </Card>

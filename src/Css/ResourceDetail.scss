@@ -1,67 +1,97 @@
+// Light Theme
+$background-light: #f8f9fa;
+$card-bg: #ffffff;
+$primary-color: #007bff;
+$secondary-color: #28a745;
+$accent-color: #ffc107;
+$text-color: #333;
+
 .resource-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 2rem;
+  background: $background-light;
+  min-height: 100vh;
+  animation: fadeIn 0.6s ease-in-out;
 }
 
-.search-card {
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.search-card, .resource-card {
   width: 100%;
-  max-width: 500px;
+  max-width: 600px;
+  padding: 2rem;
+  border-radius: 12px;
   text-align: center;
-  padding: 1.5rem;
-  background: #f8f9fa;
-  border-radius: 10px;
+  background: $card-bg;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+
+  &:hover {
+    transform: scale(1.03);
+  }
 }
 
 .title {
   font-size: 1.8rem;
-  color: #343a40;
+  color: $text-color;
 }
 
 .search-input {
   width: 100%;
   margin-top: 1rem;
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: 1px solid #ddd;
 }
 
-.search-button,
-.view-all-button {
-  width: 45%;
-  background: #007bff;
+.search-button, .view-all-button {
+  width: 48%;
+  padding: 0.8rem;
+  font-weight: bold;
   color: white;
+  border-radius: 8px;
+  transition: all 0.3s ease-in-out;
+
   &:hover {
-    background: #0056b3;
+    transform: scale(1.05);
+  }
+}
+
+.search-button {
+  background: $primary-color;
+
+  &:hover {
+    background: darken($primary-color, 10%);
   }
 }
 
 .view-all-button {
-  background: #28a745;
+  background: $secondary-color;
+
   &:hover {
-    background: #218838;
+    background: darken($secondary-color, 10%);
   }
 }
 
 .resource-card {
-  width: 100%;
-  max-width: 500px;
-  text-align: center;
-  padding: 1.5rem;
   margin-top: 2rem;
-  background: #fff;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
 }
 
 .character-name {
   font-size: 1.6rem;
   font-weight: bold;
-  color: #333;
+  color: $text-color;
 }
 
 .badges-group {
   display: flex;
   justify-content: center;
-  gap: 10px;
+  gap: 12px;
 }
 
 .error {
@@ -74,21 +104,30 @@
 }
 
 .back-button {
-  background: #ffc107;
+  background: $accent-color;
   color: black;
+  padding: 0.8rem;
+  font-weight: bold;
+  border-radius: 8px;
+  transition: all 0.3s ease-in-out;
+
   &:hover {
-    background: #e0a800;
+    background: darken($accent-color, 10%);
+    transform: scale(1.05);
   }
 }
 
+// Responsive Design
 @media (max-width: 768px) {
   .search-card,
   .resource-card {
     width: 90%;
+    padding: 1.5rem;
   }
 
   .search-button,
   .view-all-button {
     width: 100%;
+    margin-top: 0.5rem;
   }
 }
