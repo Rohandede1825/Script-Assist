@@ -2,6 +2,7 @@ import React, { useState, ChangeEvent, FormEvent } from "react";
 import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
+import { Navigate } from "react-router-dom";
 
 interface FormData {
   email: string;
@@ -9,6 +10,7 @@ interface FormData {
 }
 
 const Login: React.FC = () => {
+    const navigate = useNavigate();
   const [formData, setFormData] = useState<FormData>({ email: "", password: "" });
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -28,6 +30,7 @@ const Login: React.FC = () => {
       );
       
       toast.success(response.data.message || "Login successful!");
+      navigate("/dashboard");
     } catch (error: any) {
       toast.error(error.response?.data?.message || "Login failed. Try again.");
     } finally {
