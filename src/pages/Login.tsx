@@ -1,5 +1,5 @@
-import React, { useState, ChangeEvent, FormEvent, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState, ChangeEvent, FormEvent } from "react";
+import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
 
@@ -8,26 +8,9 @@ interface FormData {
   password: string;
 }
 
-interface ApiResponse {
-  message: string;
-  token?: string;
-}
-
 const Login: React.FC = () => {
-  const navigate = useNavigate();
-  const [formData, setFormData] = useState<FormData>({
-    email: "",
-    password: "",
-  });
-  const [error, setError] = useState<string | null>(null);
+  const [formData, setFormData] = useState<FormData>({ email: "", password: "" });
   const [loading, setLoading] = useState<boolean>(false);
-
-  useEffect(() => {
-    // Redirect if already logged in
-    if (localStorage.getItem("authToken")) {
-      navigate("/dashboard");
-    }
-  }, [navigate]);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -36,62 +19,48 @@ const Login: React.FC = () => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
-    setError(null);
-
+    
     try {
-      const { data }: { data: ApiResponse } = await axios.post(
+      const response = await axios.post(
         "https://temp-app-backend.onrender.com/api/user/login",
         formData,
         { headers: { "Content-Type": "application/json" } }
       );
-
-      if (data.token) {
-        // Store token in localStorage
-        localStorage.setItem("authToken", data.token);
-        toast.success("Login Successful! Redirecting...");
-
-        setTimeout(() => {
-          navigate("/dashboard");
-        }, 1500); // Ensure smooth transition
-      } else {
-        throw new Error("Token not received");
-      }
+      
+      toast.success(response.data.message || "Login successful!");
     } catch (error: any) {
-      setError(error.response?.data?.message || "Login failed");
-      toast.error("Login failed. Please check your credentials.");
+      toast.error(error.response?.data?.message || "Login failed. Try again.");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen bg-white flex items-center justify-center">
-      <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md border border-gray-300">
-        <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">Login</h2>
-
-        {error && <p className="text-red-500 text-center mb-4">{error}</p>}
-
+    <div className="min-h-screen flex items-center justify-center bg-white">
+      <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-md border border-gray-300">
+        <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">Login</h2>
+        
         <form onSubmit={handleSubmit}>
-          <div className="mb-4 text-gray-800">
-            <label className="block text-sm font-medium">Email</label>
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700">Email</label>
             <input
               type="email"
               name="email"
               value={formData.email}
               onChange={handleChange}
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-teal-500 bg-white text-gray-800"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-teal-500 focus:outline-none"
               required
             />
           </div>
 
-          <div className="mb-6 text-gray-800">
-            <label className="block text-sm font-medium">Password</label>
+          <div className="mb-6">
+            <label className="block text-sm font-medium text-gray-700">Password</label>
             <input
               type="password"
               name="password"
               value={formData.password}
               onChange={handleChange}
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-teal-500 bg-white text-gray-800"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-teal-500 focus:outline-none"
               required
             />
           </div>
@@ -99,20 +68,16 @@ const Login: React.FC = () => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-gray-800 text-white py-2 px-4 rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
+            className="w-full bg-gray-800 text-white py-2 rounded-md hover:bg-gray-700 focus:outline-none"
           >
             {loading ? "Logging in..." : "Login"}
           </button>
         </form>
 
         <p className="mt-4 text-center text-sm text-gray-600">
-          Don't have an account?{" "}
-          <Link to="/signup" className="text-gray-700 hover:opacity-90 font-bold">
-            Sign up
-          </Link>
+          Don't have an account? <Link to="/signup" className="text-gray-700 font-bold">Sign up</Link>
         </p>
       </div>
-
       <ToastContainer />
     </div>
   );
