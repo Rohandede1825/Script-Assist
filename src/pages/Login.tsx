@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent, FormEvent } from "react";
+import React, { useState, ChangeEvent, FormEvent, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
@@ -22,10 +22,16 @@ const Login: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
+  useEffect(() => {
+    // Redirect if already logged in
+    if (localStorage.getItem("authToken")) {
+      navigate("/dashboard");
+    }
+  }, [navigate]);
+
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -39,8 +45,17 @@ const Login: React.FC = () => {
         { headers: { "Content-Type": "application/json" } }
       );
 
-      toast.success("Login Successful! Redirecting...");
-      navigate("/dashboard");
+      if (data.token) {
+        // Store token in localStorage
+        localStorage.setItem("authToken", data.token);
+        toast.success("Login Successful! Redirecting...");
+
+        setTimeout(() => {
+          navigate("/dashboard");
+        }, 1500); // Ensure smooth transition
+      } else {
+        throw new Error("Token not received");
+      }
     } catch (error: any) {
       setError(error.response?.data?.message || "Login failed");
       toast.error("Login failed. Please check your credentials.");
