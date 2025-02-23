@@ -1,8 +1,10 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
 import { Container, Title, Paper, Grid, Text, Divider } from "@mantine/core";
+import { useNavigate } from "react-router-dom";
 
 const HomeworldDetailPage: React.FC = () => {
+  const navigate = useNavigate();
   const location = useLocation();
   const { homeworld } = location.state as { homeworld: any };
 
@@ -82,6 +84,9 @@ const HomeworldDetailPage: React.FC = () => {
           </Grid.Col>
         </Grid>
       </Paper>
+      <button onClick={() => navigate("/dashboard")} aria-label="Go to Dashboard">
+          Dashboard
+        </button>
     </Container>
   );
 };
